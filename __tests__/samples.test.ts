@@ -1,8 +1,3 @@
-/**
- * Copyright (c) Microsoft Corporation. All rights reserved.
- * Licensed under the MIT License.
- */
-
 import { driver, By2, windowsAppDriverCapabilities } from 'selenium-appium'
 import HomePage from '../Pages/HomePage';
 import BasicInputPage from '../Pages/BasicInputPage';
@@ -29,7 +24,7 @@ describe('Samples', () => {
     await BasicInputPage.waitForPageLoaded();
   })
 
-  /*test('ButtonPage', async () => {   
+  test('ButtonPage', async () => {   
     await BasicInputPage.gotoButtonPage();
     await ButtonPage.waitForPageLoaded();
 
@@ -44,13 +39,14 @@ describe('Samples', () => {
 
     await CheckBoxPage.clickCheckbox1();
     expect(await CheckBoxPage.getControl1Output()).toBe('You checked the box.');
-  });*/
+  });
 
   test('ToggleButtonPage', async () => {
     await BasicInputPage.gotoToggleButtonPage();
     await ToggleButtonPage.waitForPageLoaded();
 
     await ToggleButtonPage.clickButton1();
+    //await ToggleButtonPage.clickButton1();
     expect(await ToggleButtonPage.getControl1Output()).toBe('On');
   })
 });
