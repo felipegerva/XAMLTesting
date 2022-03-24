@@ -1,13 +1,11 @@
 import { driver, By2, windowsAppDriverCapabilities } from 'selenium-appium'
-import HomePage from '../Pages/HomePage';
-import BasicInputPage from '../Pages/BasicInputPage';
-import ButtonPage from '../Pages/ButtonPage';
-import CheckBoxPage from '../Pages/CheckBoxPage';
-import ToggleButtonPage from '../Pages/ToggleButtonPage';
+import BasicCalculatorPage from '../Pages/BasicCalculatorPage';
+import MainPage from '../Pages/MainPage';
+import SumPage from '../Pages/SumPage';
 
 jest.setTimeout(50000);
 
-const appId = 'Microsoft.XAMLControlsGallery_8wekyb3d8bbwe!App'
+const appId = 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App'
 const capabilites = windowsAppDriverCapabilities(appId)
 
 beforeAll(() => {
@@ -18,21 +16,25 @@ afterAll(() => {
   return driver.quit();
 });
 
-describe('Samples', () => {
+describe('Testing Windows Calculator', () => {
   beforeEach(async ()=> {
-    await HomePage.gotoBasicInputPage();
-    await BasicInputPage.waitForPageLoaded();
+    await MainPage.clickZerarTudo(); // Garantindo que a calculadora esteja zerada.
+    await BasicCalculatorPage.waitForPageLoaded();
   })
 
-  test('ButtonPage', async () => {   
-    await BasicInputPage.gotoButtonPage();
-    await ButtonPage.waitForPageLoaded();
+  test('SumPage', async () => {
+    await SumPage.waitForPageLoaded();
 
-    await ButtonPage.clickButton1();
-    expect(await ButtonPage.getControl1Output()).toBe('You clicked: Button1');
+    await BasicCalculatorPage.clickN1Button();
+    await SumPage.clickSum1Button();
+    await BasicCalculatorPage.clickN7Button();
+
+    await BasicCalculatorPage.gotoResult();
+
+    expect(await BasicCalculatorPage.getResultOutput()).toBe('A exibição é 8');    
   });
 
-  test('checkboxPage', async () => {
+  /*test('checkboxPage', async () => {
     
     await BasicInputPage.gotoCheckboxPage();
     await CheckBoxPage.waitForPageLoaded();
@@ -48,5 +50,5 @@ describe('Samples', () => {
     await ToggleButtonPage.clickButton1();
     //await ToggleButtonPage.clickButton1();
     expect(await ToggleButtonPage.getControl1Output()).toBe('On');
-  })
+  })*/
 });
