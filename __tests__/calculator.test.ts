@@ -2,6 +2,9 @@ import { driver, By2, windowsAppDriverCapabilities } from 'selenium-appium'
 import BasicCalculatorPage from '../Pages/BasicCalculatorPage';
 import MainPage from '../Pages/MainPage';
 import SumPage from '../Pages/SumPage';
+import SubtractionPage from '../Pages/SubtractionPage';
+import MultiplicationPage from '../Pages/MultiplicationPage';
+import DivisionPage from '../Pages/DivisionPage';
 
 jest.setTimeout(50000);
 
@@ -34,21 +37,41 @@ describe('Testing Windows Calculator', () => {
     expect(await BasicCalculatorPage.getResultOutput()).toBe('A exibição é 8');    
   });
 
-  /*test('checkboxPage', async () => {
-    
-    await BasicInputPage.gotoCheckboxPage();
-    await CheckBoxPage.waitForPageLoaded();
+  test('SubtractionPage', async () => {
+    await SubtractionPage.waitForPageLoaded();
 
-    await CheckBoxPage.clickCheckbox1();
-    expect(await CheckBoxPage.getControl1Output()).toBe('You checked the box.');
+    await BasicCalculatorPage.clickN7Button();
+    await SubtractionPage.clickSubtraction1Button();
+    await BasicCalculatorPage.clickN1Button();
+
+    await BasicCalculatorPage.gotoResult();
+
+    expect(await BasicCalculatorPage.getResultOutput()).toBe('A exibição é 6');    
   });
 
-  test('ToggleButtonPage', async () => {
-    await BasicInputPage.gotoToggleButtonPage();
-    await ToggleButtonPage.waitForPageLoaded();
+  test('MultiplicationPage', async () => {
+    await MultiplicationPage.waitForPageLoaded();
 
-    await ToggleButtonPage.clickButton1();
-    //await ToggleButtonPage.clickButton1();
-    expect(await ToggleButtonPage.getControl1Output()).toBe('On');
-  })*/
+    await BasicCalculatorPage.clickN7Button();
+    await MultiplicationPage.clickMultiplication1Button();
+    await BasicCalculatorPage.clickN9Button();
+
+    await BasicCalculatorPage.gotoResult();
+
+    expect(await BasicCalculatorPage.getResultOutput()).toBe('A exibição é 63');    
+  });
+
+  test('DivisionPage', async () => {
+    await DivisionPage.waitForPageLoaded();
+
+    await BasicCalculatorPage.clickN7Button();
+    await BasicCalculatorPage.clickN0Button();
+    await DivisionPage.clickDivision1Button();
+    await BasicCalculatorPage.clickN1Button();
+    await BasicCalculatorPage.clickN0Button();
+
+    await BasicCalculatorPage.gotoResult();
+
+    expect(await BasicCalculatorPage.getResultOutput()).toBe('A exibição é 7');    
+  });
 });
