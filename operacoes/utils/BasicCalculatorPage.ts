@@ -1,16 +1,31 @@
 import { PageObject, By2 } from "selenium-appium";
 
 class BasicCalculatorPage extends PageObject {
-    isPageLoaded(){
+    isPageLoaded() {
         return this.multiplicationButton.isDisplayed();
     }
 
-    private get sumButton(){return By2.nativeName('Mais');}
-    private get subtractionButton(){return By2.nativeName('Menos');}
-    private get multiplicationButton(){return By2.nativeName('Multiplicar por');}
-    private get divisionButton(){return By2.nativeName('Dividir por');}
+    get relacaoFuncaoENumero() {
+        return [
+            { numero: 0, funcao: this.clickN0Button },
+            { numero: 1, funcao: this.clickN1Button },
+            { numero: 2, funcao: this.clickN2Button },
+            { numero: 3, funcao: this.clickN3Button },
+            { numero: 4, funcao: this.clickN4Button },
+            { numero: 5, funcao: this.clickN5Button },
+            { numero: 6, funcao: this.clickN6Button },
+            { numero: 7, funcao: this.clickN7Button },
+            { numero: 8, funcao: this.clickN8Button },
+            { numero: 9, funcao: this.clickN9Button }
+        ]
+    }
 
-    private get equalButton(){ return By2.nativeAccessibilityId('equalButton'); }
+    private get sumButton() { return By2.nativeName('Mais'); }
+    private get subtractionButton() { return By2.nativeName('Menos'); }
+    private get multiplicationButton() { return By2.nativeName('Multiplicar por'); }
+    private get divisionButton() { return By2.nativeName('Dividir por'); }
+
+    private get equalButton() { return By2.nativeAccessibilityId('equalButton'); }
     private get resultOutput() { return By2.nativeAccessibilityId('CalculatorResults'); }
 
     private get n0Button() { return By2.nativeAccessibilityId('num0Button'); }
@@ -24,27 +39,27 @@ class BasicCalculatorPage extends PageObject {
     private get n8Button() { return By2.nativeAccessibilityId('num8Button'); }
     private get n9Button() { return By2.nativeAccessibilityId('num9Button'); }
 
-    gotoSum(){
+    gotoSum() {
         return this.sumButton.click();
     }
 
-    gotoSubtraction(){
+    gotoSubtraction() {
         return this.subtractionButton.click();
     }
 
-    gotoMultiplication(){
+    gotoMultiplication() {
         return this.multiplicationButton.click();
     }
 
-    gotoDivision(){
+    gotoDivision() {
         return this.divisionButton.click();
     }
 
-    gotoResult(){
+    gotoResult() {
         return this.equalButton.click();
     }
 
-    getResultOutput(){
+    getResultOutput() {
         return this.resultOutput.getText();
     }
 
